@@ -2,9 +2,12 @@ package com.satrtc.rest.webservices.restful_web_services.user;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.Size;
+
 public class User {
 	
 	private int id;
+	@Size(min=3)
 	private String name;
 	private LocalDate birthDate;
 	
