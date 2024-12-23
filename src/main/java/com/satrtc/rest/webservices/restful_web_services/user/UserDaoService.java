@@ -39,4 +39,14 @@ public class UserDaoService {
 		userList.add(user);
 		return user;
 	}
+
+	public void deleteUser(int id) {
+		// TODO Auto-generated method stub
+		int temp;
+		for (User user : userList) {
+			if(user.getId()==id)
+				temp= id;
+		}
+		userList.remove(id);
+	}
 }
