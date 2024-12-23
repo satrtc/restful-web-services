@@ -34,8 +34,9 @@ public class UserDaoService {
 		
 	}
 
-	public void addUser(User user) {
+	public User addUser(User user) {
 		user.setId(++userCount);
 		userList.add(user);
+		return user;
 	}
 }
