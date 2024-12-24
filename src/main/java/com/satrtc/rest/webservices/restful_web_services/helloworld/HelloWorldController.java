@@ -40,11 +40,72 @@ public class HelloWorldController {
 		return new HelloWorldBean("Hello world from, "+name);
 	}
 	
-	
+	//implementing internationalisation under content negotiation
 	@GetMapping(path="/hello-world-i8n")
 	public String helloWorldInternationalisation()
 	{
 		Locale locale=LocaleContextHolder.getLocale();
 		return messageSource.getMessage("good.morning.message", null, "Default message", locale);
+	}
+	
+	//implementing versioning of REST API:
+	
+	//URI versioning 
+	@GetMapping(path="/hello-world/v1")
+	public Person personURIversion1()
+	{
+		return new Person("Matcha");
+	}
+	
+	@GetMapping(path="/hello-world/v2")
+	public Person personURIversion2()
+	{
+		return new Person("Mr. "+"Matcha");
+	}
+	
+	
+	//request parameter versioning
+	@GetMapping(path="/hello-world/param",params = "version=1")
+	public Person personParamVersion1()
+	{
+		return new Person("Mr. "+"Matcha"+" param version 1");
+	}
+	
+	@GetMapping(path="/hello-world/param",params = "version=2")
+	public Person personParamVersion2()
+	{
+		return new Person("Mr. "+"Matcha"+" param version 2");
+	}
+	
+	
+	//custom header versioning
+	@GetMapping(path="/hello-world", headers="api-version=1")
+	public Person personHeaderversion1()
+	{
+		return new Person("Mr. "+"Matcha"+" header version 1");
+
+	}
+	
+	@GetMapping(path="/hello-world", headers="api-version=2")
+	public Person personHeaderversion2()
+	{	
+		return new Person("Mr. "+"Matcha"+" header version 2");
+
+	}
+	
+	
+	//media type/ content negotiation versioning
+	@GetMapping(path="/hello-world", produces="application/api-version-v1+json")
+	public Person personMediaTypeversion1()
+	{		
+		return new Person("Mr. "+"Matcha"+" media type version 1");
+
+	}
+	
+	@GetMapping(path="/hello-world", produces="application/api-version-v2+json")
+	public Person personMediaTypeversion2()
+	{		
+		return new Person("Mr. "+"Matcha"+" media type version 2");
+
 	}
 }
